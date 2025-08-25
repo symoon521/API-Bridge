@@ -9,6 +9,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
+import Link from 'next/link';
 
 const apis = [
   {
@@ -51,34 +52,36 @@ export default function MyApisPage() {
         <>
             <div className="flex items-center justify-between">
                 <h1 className="text-lg font-semibold md:text-2xl">내 API 목록</h1>
-                <Button>새 API 생성</Button>
+                <Button asChild>
+                    <Link href="/dashboard">새 API 생성</Link>
+                </Button>
             </div>
-            <div className="rounded-lg border shadow-sm">
+            <div className="rounded-lg border shadow-sm bg-card">
                 <Table>
                     <TableHeader>
                         <TableRow>
                             <TableHead>이름</TableHead>
-                            <TableHead>상태</TableHead>
+                            <TableHead className="hidden md:table-cell">상태</TableHead>
                             <TableHead>엔드포인트</TableHead>
-                            <TableHead>호출 수</TableHead>
-                            <TableHead>응답속도</TableHead>
-                            <TableHead>생성일</TableHead>
-                            <TableHead></TableHead>
+                            <TableHead className="hidden md:table-cell text-right">호출 수</TableHead>
+                            <TableHead className="hidden sm:table-cell text-right">응답속도</TableHead>
+                            <TableHead className="hidden sm:table-cell text-right">생성일</TableHead>
+                            <TableHead><span className="sr-only">Actions</span></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {apis.map((api) => (
                             <TableRow key={api.name}>
                                 <TableCell className="font-medium">{api.name}</TableCell>
-                                <TableCell>
-                                    <Badge variant={api.status === 'Active' ? 'default' : 'destructive'}>
+                                <TableCell className="hidden md:table-cell">
+                                    <Badge variant={api.status === 'Active' ? 'default' : 'destructive'} className={api.status === 'Active' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'}>
                                         {api.status === 'Active' ? '활성' : '비활성'}
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="font-code">{api.endpoint}</TableCell>
-                                <TableCell>{api.calls.toLocaleString()}</TableCell>
-                                <TableCell>{api.latency}</TableCell>
-                                <TableCell>{api.createdAt}</TableCell>
+                                <TableCell className="hidden md:table-cell text-right">{api.calls.toLocaleString()}</TableCell>
+                                <TableCell className="hidden sm:table-cell text-right">{api.latency}</TableCell>
+                                <TableCell className="hidden sm:table-cell text-right">{api.createdAt}</TableCell>
                                 <TableCell>
                                     <Button variant="ghost" size="icon">
                                         <MoreHorizontal className="h-4 w-4" />

@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 export default function SettingsPage() {
   return (
     <div className="grid gap-6">
-      <Card>
+       <Card>
         <CardHeader>
           <CardTitle>프로필</CardTitle>
           <CardDescription>
@@ -65,8 +65,14 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent>
             <p className="text-sm text-muted-foreground">
-                계정을 삭제하면 모든 API와 데이터가 사라집니다.
+                계정을 삭제하면 모든 API와 데이터가 사라집니다. 계속하려면 비밀번호를 입력하세요.
             </p>
+             <form className="grid gap-4 mt-4">
+                <div className="grid gap-2">
+                    <Label htmlFor="delete-password">비밀번호</Label>
+                    <Input id="delete-password" type="password" placeholder="비밀번호를 입력하세요" />
+                </div>
+            </form>
         </CardContent>
         <CardFooter className="border-t px-6 py-4">
           <Button variant="destructive">계정 삭제</Button>
