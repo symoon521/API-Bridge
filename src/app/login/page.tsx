@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -34,7 +35,9 @@ export default function LoginPage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
-            <Button className="w-full">로그인</Button>
+            <Button className="w-full" asChild>
+              <Link href="/dashboard">로그인</Link>
+            </Button>
             <p className="text-center text-sm text-muted-foreground">
               계정이 없으신가요?{' '}
               <Link href="#" className="font-medium text-primary hover:underline">
