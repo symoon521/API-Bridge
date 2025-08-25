@@ -1,8 +1,8 @@
 
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { useEffect, useRef } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
+import { useFormStatus } from 'react-dom';
 import { generateApiCall, type FormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Textarea } from '@/components/ui/textarea';
@@ -42,7 +42,7 @@ function SubmitButton() {
 }
 
 export default function ApiBridgeForm() {
-  const [state, formAction] = useFormState(generateApiCall, initialState);
+  const [state, formAction] = useActionState(generateApiCall, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
