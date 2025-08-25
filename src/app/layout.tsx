@@ -25,7 +25,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          'font-body antialiased aurora-bg animate-aurora-move'
+          'font-body antialiased'
         )}
       >
         {children}
