@@ -1,8 +1,9 @@
+
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Package, Settings, BotMessageSquare } from 'lucide-react';
+import { Home, Package, Settings, Shield } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -10,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 const navItems = [
     { href: '/dashboard', label: '대시보드', icon: Home },
     { href: '/my-apis', label: '내 API', icon: Package, badge: 4 },
+    { href: '/admin', label: '관리자', icon: Shield },
     { href: '/settings', label: '설정', icon: Settings },
 ];
 

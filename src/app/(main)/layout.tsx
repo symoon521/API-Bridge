@@ -1,3 +1,6 @@
+
+'use client'
+
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -8,16 +11,30 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
 } from '@/components/ui/dropdown-menu';
 import { Logo } from '@/components/icons';
 import { Nav } from '@/components/nav';
 import ConstellationBackground from '@/components/constellation-background';
+import { Moon, Sun, Globe } from 'lucide-react';
+import React from 'react';
+
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [theme, setTheme] = React.useState('dark');
+  const [lang, setLang] = React.useState('ko');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
   return (
     <div className="relative min-h-screen w-full bg-background">
       <ConstellationBackground />
@@ -40,6 +57,25 @@ export default function MainLayout({
             <div className="w-full flex-1">
               {/* Add Search if needed */}
             </div>
+             <Button variant="ghost" size="icon" onClick={toggleTheme}>
+              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+             <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Globe className="h-5 w-5" />
+                   <span className="sr-only">Change language</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuRadioGroup value={lang} onValueChange={setLang}>
+                   <DropdownMenuRadioItem value="ko">한국어</DropdownMenuRadioItem>
+                   <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" size="icon" className="rounded-full">
